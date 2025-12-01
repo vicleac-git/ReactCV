@@ -92,7 +92,7 @@ Los datos del CV se gestionan desde Google Sheets:
 - **Experiencia**: Historial profesional y académico
 - **Habilidades**: Skills técnicas y blandas
 - **Formación Complementaria**: Cursos y certificaciones
-- **Voluntariado**: Experiencia en proyectos sociales
+- **Otra Experiencia**: Otro tipo de experiencia profesional (voluntariados, proyectos puntuales, etc.)
 - **Portfolio**: Proyectos destacados con detalles
 
 ## 🎯 Secciones Principales
@@ -102,7 +102,7 @@ Los datos del CV se gestionan desde Google Sheets:
 - **Habilidades**: Skills técnicas con niveles y soft skills
 - **Portafolio**: Proyectos destacados con páginas dedicadas
 - **Formación**: Cursos y certificaciones con filtros por año
-- **Voluntariado**: Colaboraciones y proyectos sociales
+- **Otra Experiencia**: Colaboraciones y proyectos sociales
 
 ## 🔧 Scripts Disponibles
 
@@ -113,10 +113,21 @@ npm run preview  # Preview del build
 npm run lint     # Ejecutar ESLint
 ```
 
-## 📝 Licencia
+## 📝 Licencia y Derechos de Autor
 
-© 2025 Víctor Leal Acosta. Todos los derechos reservados.
+Este proyecto está bajo **licencia MIT** (ver archivo [LICENSE](LICENSE)).
+
+### Código
+Eres libre de usar el código como referencia para tu propio portafolio. Por favor:
+- Adapta el contenido a tu propia experiencia
+- No copies directamente mi información personal, CV o proyectos
+- Da crédito si usas partes significativas del código
+
+### Contenido e Imágenes
+El contenido personal, fotografías y descripciones de proyectos están protegidos por derechos de autor.
+
+📄 **Ver detalles completos**: [ATTRIBUTION.md](ATTRIBUTION.md)
 
 ---
 
-**Desarrollado con ❤️ usando React + TypeScript + Vite**
+**Desarrollado con ❤️ por Víctor Leal Acosta usando React + TypeScript + Vite**
