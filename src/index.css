@@ -1,0 +1,1046 @@
+/* ------------------------------------ */
+/* 0. VARIABLES Y CONFIGURACIÓN GLOBAL */
+/* ------------------------------------ */
+:root {
+    --color-fondo: #000000;
+    --color-texto: #ffffff;
+    --color-acento-profesional: #67a1f1;
+    /* Azul claro para Trabajo */
+    --color-acento-formativo: #03c242;
+    /* Verde aguamarina para Estudio */
+    --color-separador: #333333;
+    /* Color de la línea de eje gris de fondo */
+    --color-tarjeta: #1e1e1e;
+    /* Fondo de las tarjetas */
+    --color-sombra: rgba(0, 0, 0, 0.4);
+    /* Sombra de las tarjetas */
+    --ancho-eje: 8px;
+    /* Ancho para el eje bicoloreado */
+    --punto-offset-y: 30px;
+    /* Altura donde se ubican el punto y la flecha (CRÍTICO) */
+    --ancho-flecha: 10px;
+    /* Ancho del triángulo de la flecha */
+
+    --neon-primary: #8b5cf6;
+    /* Violeta */
+    --neon-secondary: #06b6d4;
+    /* Cyan */
+    --bg-dark: #0f172a;
+    /* Slate 900 */
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: #f3f4f6;
+    /* overflow-x: hidden; Removed to fix sticky headers */
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+}
+
+.neon-text {
+    /* Refined neon effect: Blue text with reduced, subtle glow */
+    text-shadow:
+        0 0 5px rgba(59, 130, 246, 0.5),
+        /* Blue-500 with opacity */
+        0 0 10px rgba(59, 130, 246, 0.3),
+        0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.neon-border {
+    box-shadow: 0 0 10px var(--neon-primary), inset 0 0 10px var(--neon-primary);
+}
+
+.neon-box:hover {
+    box-shadow: 0 0 15px var(--neon-secondary), 0 0 30px var(--neon-secondary);
+    border-color: var(--neon-secondary);
+}
+
+/* ------------------------------------ */
+/* 1. CONTENEDOR Y MAQUETACIÓN */
+/* ------------------------------------ */
+.contenedor {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+header#perfil {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.foto-perfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-acento-profesional);
+}
+
+.header-texto {
+    flex-grow: 1;
+}
+
+section,
+footer {
+    padding: 10px 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-separador);
+    margin: 30px 0;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 5px;
+    color: var(--color-texto);
+}
+
+h2 {
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--color-separador);
+    padding-bottom: 5px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.titulo-profesional {
+    font-size: 1.2em;
+    color: var(--color-acento-profesional);
+    margin-bottom: 20px;
+}
+
+/* Contacto */
+.contacto a {
+    color: var(--color-acento-profesional);
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.contacto a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+    padding-top: 10px;
+}
+
+/* --- Estilos para Secciones Desplegables --- */
+.seccion-desplegable summary {
+    cursor: pointer;
+    list-style: none;
+    /* Ocultar el marcador por defecto */
+    outline: none;
+}
+
+.seccion-desplegable summary::-webkit-details-marker {
+    display: none;
+    /* Ocultar el marcador en Chrome/Safari */
+}
+
+.seccion-desplegable summary h2 {
+    display: inline-block;
+    /* Para que el hover afecte solo al texto */
+    transition: color 0.2s ease;
+}
+
+.seccion-desplegable summary:hover h2 {
+    color: var(--color-acento-profesional);
+}
+
+.seccion-desplegable>section {
+    padding-top: 20px;
+}
+
+
+/* ------------------------------------ */
+/* 2. CONTENEDOR DE LA LÍNEA DE TIEMPO */
+/* ------------------------------------ */
+#timeline {
+    position: relative;
+    padding-bottom: 50px;
+}
+
+/* 2.1. El Eje (Línea Central) */
+.timeline-container {
+    /* Estructura: [1fr (Tarjeta Izq)] [8px (Eje)] [1fr (Tarjeta Der)] */
+    position: relative;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr var(--ancho-eje) 1fr;
+    height: auto;
+}
+
+/* El Eje Estático de Fondo (Línea Central) */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: var(--ancho-eje);
+    background-color: var(--color-separador);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: calc(var(--ancho-eje) / -2);
+    z-index: 1;
+}
+
+/* Contenedor para las dos mitades del eje que se colorearán */
+.timeline-axis-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--ancho-eje);
+    height: 100%;
+    z-index: 2;
+    /* Se coloca entre el eje de fondo y las tarjetas */
+    pointer-events: none;
+    /* No interfiere con el ratón */
+    display: flex;
+}
+
+.timeline-axis-half {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    /* CRÍTICO: para que los segmentos de color se posicionen dentro */
+}
+
+
+/* ------------------------------------ */
+/* 3. ÍTEMS (TARJETAS) Y CONTENIDO */
+/* ------------------------------------ */
+.timeline-item {
+    padding: var(--punto-offset-y) 0;
+    position: relative;
+    width: 100%;
+    z-index: 5;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Clase añadida por JS para animar la entrada */
+.timeline-item.visible {
+    opacity: 1;
+}
+
+/* 3.1. Contenido de la Tarjeta */
+.timeline-content {
+    /* Nuevo Diseño: Gradiente sutil, borde de acento y sombra refinada */
+    background: linear-gradient(145deg, #2c2c2c, #1e1e1e);
+    /* Gradiente oscuro */
+    padding: 20px;
+    /* Espaciado interno reducido */
+    border-radius: 8px;
+    /* Bordes ligeramente más redondeados */
+    border: 4px solid transparent;
+    /* Borde transparente para reservar espacio para el hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    /* Sombra más suave y difusa */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    width: auto;
+    top: auto;
+}
+
+/* Efecto de "glow" en el hover */
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+    /* Eleva la tarjeta */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    /* Sombra más pronunciada */
+}
+
+/* Coloreamos el borde en el hover según la tipología */
+.timeline-item.profesional:hover .timeline-content,
+.timeline-item.formación-complementaria:hover .timeline-content {
+    /* Complementaria también usa acento profesional */
+    border-color: var(--color-acento-profesional);
+}
+
+.timeline-item.formativo:hover .timeline-content,
+.timeline-item.formación-reglada:hover .timeline-content {
+    border-color: var(--color-acento-formativo);
+}
+
+/* ... Títulos y Metadatos */
+.header-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-empresa {
+    width: 55px;
+    /* Aumentamos ligeramente el tamaño para dar más espacio */
+    height: 55px;
+    object-fit: contain;
+    /* 'contain' asegura que todo el logo sea visible sin distorsión */
+    padding: 2px;
+    /* Pequeño espacio interno */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.timeline-content h3 {
+    margin: 0 10px 5px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.timeline-content p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    /* Ligeramente más grande para legibilidad */
+}
+
+.timeline-content a {
+    color: inherit;
+    text-decoration: none;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.timeline-content a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* --- DETALLES DESPLEGABLES (SUMMARY/DETAILS) --- */
+
+.detalle-desplegable {
+    margin-top: 10px;
+}
+
+.detalle-desplegable summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #282828;
+    color: var(--color-texto);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    list-style: none;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+}
+
+/* Hover para tarjetas PROFESIONALES (Azul) */
+.timeline-item.profesional .detalle-desplegable summary:hover {
+    background-color: var(--color-acento-profesional);
+    color: var(--color-fondo);
+}
+
+/* Hover para tarjetas FORMATIVAS (Verde) */
+.timeline-item.formativo .detalle-desplegable summary:hover,
+.timeline-item.formación-reglada .detalle-desplegable summary:hover {
+    background-color: var(--color-acento-formativo);
+    color: var(--color-fondo);
+}
+
+.detalle-desplegable[open] summary {
+    font-style: italic;
+}
+
+
+/* 3.2. Segmento de Color */
+/* Estos son los bloques de color que se añadirán a cada mitad del eje */
+.color-segment {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    transform-origin: top;
+    /* La animación crece desde arriba hacia abajo */
+    transform: scaleY(0);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.color-segment.visible {
+    transform: scaleY(1);
+}
+
+.color-segment.profesional {
+    background-color: var(--color-acento-profesional);
+}
+
+.color-segment.formativo,
+.color-segment.formación-reglada {
+    background-color: var(--color-acento-formativo);
+}
+
+
+/* ------------------------------------ */
+/* 4. POSICIONAMIENTO DE LAS TARJETAS (Desktop: Por Tipología) */
+/* ------------------------------------ */
+
+/* Estilos comunes para las tarjetas en la vista de escritorio */
+.timeline-item {
+    /* Eliminamos el ancho manual y los floats. Grid se encarga de todo. */
+    margin-bottom: 30px;
+    padding: 0;
+    /* Ya se aplica en el contenedor */
+}
+
+/* Tarjetas PROFESIONALES (Derecha) */
+.timeline-item.profesional {
+    grid-column: 3 / 4;
+    /* Colócala en la columna derecha */
+    justify-self: start;
+    margin-left: 3%;
+    /* Separación del 5% hacia el exterior */
+    /* Animación: entra desde la derecha */
+    transform: translateX(50px);
+}
+
+/* Tarjetas FORMATIVAS (Izquierda) */
+.timeline-item.formativo,
+.timeline-item.formación-reglada {
+    grid-column: 1 / 2;
+    /* Colócala en la columna izquierda */
+    justify-self: end;
+    margin-right: 3%;
+    /* Separación del 5% hacia el exterior */
+    /* Animación: entra desde la izquierda */
+    transform: translateX(-50px);
+}
+
+
+/* ------------------------------------ */
+/* 5. EL PUNTO DE CONEXIÓN (El selector :after de la tarjeta) */
+/* --- UNIFICADO Y CORREGIDO --- */
+/* ------------------------------------ */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: var(--punto-offset-y);
+    z-index: 10;
+    border: 3px solid var(--color-tarjeta);
+    /* Borde de la tarjeta (ya no el fondo) */
+    outline: 1px solid rgba(255, 255, 255, 0.1);
+
+    transition: all 0.3s ease;
+}
+
+/* Punto profesional (Lado Izquierdo) */
+.timeline-item.profesional::after {
+    right: calc(100% + 3% + 4px - 7.5px);
+    /* Posiciona el círculo sobre el eje */
+    background-color: var(--color-acento-profesional);
+    box-shadow: 0 0 8px var(--color-acento-profesional), 0 0 15px rgba(103, 161, 241, 0.4);
+}
+
+/* Punto formativo (Lado Derecho) */
+.timeline-item.formativo::after,
+.timeline-item.formación-reglada::after {
+    left: calc(100% + 3% + 4px - 7.5px);
+    /* Posiciona el círculo sobre el eje */
+    background-color: var(--color-acento-formativo);
+    box-shadow: 0 0 8px var(--color-acento-formativo), 0 0 15px rgba(3, 194, 66, 0.4);
+}
+
+/* Hover unificado */
+.timeline-item:hover::after {
+    border-width: 0px;
+    outline: none;
+    transform: scale(1.4);
+    /* Hover aplicado a ambos, ya no necesita translateX */
+}
+
+
+/* ------------------------------------ */
+/* 6. CONECTORES (Flechas) */
+/* ------------------------------------ */
+.timeline-item .timeline-content::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    top: calc(var(--punto-offset-y) - var(--ancho-flecha));
+    z-index: 10;
+}
+
+/* Flecha para tarjeta PROFESIONAL (Derecha) -> Apunta a la IZQUIERDA (al eje) */
+.timeline-item.profesional .timeline-content::before {
+    border-width: var(--ancho-flecha) var(--ancho-flecha) var(--ancho-flecha) 0;
+    /* Triángulo apuntando a la derecha */
+    border-color: transparent var(--color-acento-profesional) transparent transparent;
+    /* Color de acento profesional */
+    left: calc(-1 * var(--ancho-flecha));
+    /* Se pega al borde derecho de la tarjeta */
+    right: auto;
+}
+
+/* Flecha para tarjeta FORMATIVO (Izquierda) -> Apunta a la DERECHA (al eje) */
+.timeline-item.formativo .timeline-content::before,
+.timeline-item.formación-reglada .timeline-content::before {
+    border-width: var(--ancho-flecha) 0 var(--ancho-flecha) var(--ancho-flecha);
+    /* Triángulo apuntando a la izquierda */
+    border-color: transparent transparent transparent var(--color-acento-formativo);
+    /* Color de acento formativo */
+    right: calc(-1 * var(--ancho-flecha));
+    /* Se pega al borde izquierdo de la tarjeta */
+    left: auto;
+}
+
+/* ------------------------------------ */
+/* 7. ANIMACIONES DE ENTRADA */
+/* ------------------------------------ */
+@keyframes slideInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timeline-item.profesional.visible {
+    /* La tarjeta profesional está a la derecha, por lo que entra desde la derecha */
+    animation: slideInFromRight 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform: translateX(0) !important;
+    /* Sobrescribe la propiedad transform de la sección 4 */
+}
+
+.timeline-item.formativo.visible,
+.timeline-item.formación-reglada.visible {
+    /* La tarjeta formativa está a la izquierda, por lo que entra desde la izquierda */
+    animation: slideInFromLeft 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform: translateX(0) !important;
+    /* Sobrescribe la propiedad transform de la sección 4 */
+}
+
+
+/* ------------------------------------ */
+/* 8. DISEÑO RESPONSIVO (Móviles) */
+/* ------------------------------------ */
+@media screen and (max-width: 768px) {
+
+    /* 8.1 Ajustes Generales */
+    .contenedor {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    /* 8.2. Movimiento del Eje Temporal */
+    .timeline-container {
+        grid-template-columns: 20px 1fr;
+        /* Eje a la izquierda */
+    }
+
+    .timeline-container::after {
+        left: 20px;
+        transform: none;
+        width: 4px;
+        margin-left: -2px;
+    }
+
+    /* 8.3. Ajuste de Elementos de la Línea (Punto y Barra) */
+    .timeline-item {
+        grid-column: 2 / 3;
+        /* Ambas tarjetas a la derecha del eje móvil */
+        padding: var(--punto-offset-y) 0;
+        width: 100%;
+        /* Ajuste de ancho */
+    }
+
+    /* CRÍTICO: Alinea el punto al eje móvil */
+    .timeline-item::after {
+        left: 20px;
+        top: var(--punto-offset-y);
+        transform: translateX(-50%);
+        right: auto;
+    }
+
+    /* La barra de duración */
+    .timeline-axis-container {
+        left: 20px;
+        /* Mueve el eje dinámico a la izquierda */
+        width: 4px;
+        /* Ancho del eje en móvil */
+    }
+
+    /* 8.4. Posicionamiento de la Tarjeta */
+    .timeline-item.profesional,
+    .timeline-item.formativo,
+    .timeline-item.formación-reglada {
+        float: none;
+        /* Desactiva float */
+        clear: both;
+        /* Desactiva clear */
+        margin: 0;
+        margin-left: 30px;
+        /* Separación del eje de 20px + 10px de margen */
+        margin-bottom: 30px;
+        /* Espacio entre ítems */
+    }
+
+    /* 8.5. Ajuste de las Flechas (Conectores) */
+    .timeline-item .timeline-content::before {
+        /* Flecha apuntando a la izquierda (hacia el eje) */
+        border-width: var(--ancho-flecha) var(--ancho-flecha) var(--ancho-flecha) 0;
+        border-color: transparent var(--color-tarjeta) transparent transparent;
+        /* Se pega al borde izquierdo de la tarjeta */
+        left: calc(var(--ancho-flecha) * -1);
+        right: auto;
+        top: calc(var(--punto-offset-y) - var(--ancho-flecha));
+    }
+
+    /* 8.6. Desactivar animaciones con Grid en móvil */
+    .timeline-item.profesional.visible,
+    .timeline-item.formativo.visible,
+    .timeline-item.formación-reglada.visible {
+        animation: none;
+        transform: none;
+        opacity: 1;
+    }
+}
+
+
+/* ------------------------------------ */
+/* 9. LEYENDA DE LA LÍNEA DE TIEMPO */
+/* ------------------------------------ */
+#leyenda-timeline {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 10px 0;
+}
+
+.leyenda-card {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.95em;
+    color: var(--color-fondo);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.leyenda-card span {
+    font-size: 1.2em;
+    margin-right: 8px;
+    line-height: 1;
+}
+
+/* Estilos Específicos para la Leyenda Profesional */
+.profesional-leyenda {
+    background-color: var(--color-acento-profesional);
+}
+
+/* Estilos Específicos para la Leyenda Formativa */
+.formativo-leyenda {
+    background-color: var(--color-acento-formativo);
+}
+
+/* ------------------------------------ */
+/* 10. ESTILOS PARA CONTENIDO EXTENDIDO */
+/* ------------------------------------ */
+.contenido-extendido {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--color-separador);
+}
+
+.contenido-extendido h4 {
+    color: var(--color-texto);
+    font-size: 1.1em;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.contenido-extendido p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--color-texto);
+}
+
+.contenido-extendido ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.contenido-extendido li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    color: #bdbdbd;
+}
+
+.contenido-extendido strong {
+    color: var(--color-texto);
+    font-weight: bold;
+}
+
+/* Neutraliza colores de acento en párrafos generales del contenido extendido */
+.contenido-extendido p,
+.contenido-extendido strong {
+    color: var(--color-texto);
+    font-weight: normal;
+}
+
+.contenido-extendido strong,
+.contenido-extendido p strong {
+    font-weight: bold;
+    color: var(--color-texto);
+}
+
+
+/* --- ESTILOS DE HERRAMIENTAS PERSONALIZADAS --- */
+
+.contenido-extendido .tools-line {
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: var(--color-texto);
+    display: block;
+}
+
+.contenido-extendido .tools-label {
+    font-weight: bold;
+    color: var(--color-texto);
+    margin-right: 10px;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: var(--color-separador);
+}
+
+.contenido-extendido .tools-values {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: #282828;
+    margin-top: 5px;
+}
+
+/* Aplicación de Color de Acento a los Valores */
+
+.timeline-item.profesional .tools-values,
+.timeline-item.formación-complementaria .tools-values {
+    color: var(--color-acento-profesional);
+    font-weight: bold;
+}
+
+.timeline-item.formativo .tools-values {
+    color: var(--color-acento-formativo);
+    font-weight: bold;
+}
+
+.timeline-item.formación-reglada .tools-values {
+    color: var(--color-acento-formativo);
+    font-weight: bold;
+}
+
+/* ------------------------------------ */
+/* 11. SECCIÓN DE HABILIDADES (Grid de 2 Columnas) */
+/* ------------------------------------ */
+
+.habilidades-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.habilidades-col {
+    background-color: var(--color-tarjeta);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--color-sombra);
+    min-height: 250px;
+}
+
+.habilidades-col h3 {
+    font-size: 1.5em;
+    color: var(--color-acento-profesional);
+    border-bottom: 2px solid var(--color-separador);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.habilidades-lista {
+    line-height: 2.5;
+}
+
+.habilidades-lista span {
+    display: inline-block;
+    color: var(--color-texto);
+    padding: 7px 15px;
+    border-radius: 20px;
+    margin: 4px 7px 4px 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+    border: 1px solid var(--color-separador);
+    background-color: transparent;
+}
+
+.habilidades-lista span:hover {
+    background-color: var(--color-acento-profesional);
+    color: var(--color-fondo);
+    border-color: var(--color-acento-profesional);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Diseño responsivo para la sección de habilidades */
+@media screen and (max-width: 768px) {
+    .habilidades-grid-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* ------------------------------------ */
+/* 12. SECCIÓN DE FORMACIÓN COMPLEMENTARIA */
+/* ------------------------------------ */
+
+#formacion-complementaria {
+    padding-top: 20px;
+}
+
+.subtitulo-seccion {
+    text-align: center;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    color: #b3b3b3;
+    font-style: italic;
+}
+
+.cursos-grid {
+    display: grid;
+    /* Crea columnas de al menos 300px, que se ajustan automáticamente */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.curso-card {
+    background-color: var(--color-tarjeta);
+    border-radius: 8px;
+    padding: 20px;
+    border-left: 5px solid var(--color-acento-formativo);
+    /* Borde de acento verde */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* --- REFACTORIZACIÓN A CSS GRID --- */
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    /* Header, Título, Footer (flexible) */
+    gap: 15px;
+    /* Espacio uniforme entre header, título y footer */
+}
+
+/* --- Estilo específico para tarjetas de voluntariado --- */
+.voluntariado-card {
+    border-left-color: var(--color-acento-profesional);
+}
+
+.voluntariado-card:hover {
+    box-shadow: 0 8px 25px rgba(103, 161, 241, 0.2);
+    /* Sombra con acento azul */
+}
+
+.curso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(3, 194, 66, 0.2);
+    /* Sombra con acento verde */
+}
+
+.curso-titulo {
+    margin: 0;
+    font-size: 1.15em;
+    /* Ligeramente reducido para mejor ajuste */
+    color: var(--color-texto);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.curso-header {
+    display: flex;
+    justify-content: space-between;
+    /* Logo a la izquierda, institución a la derecha */
+    align-items: center;
+    /* Centra verticalmente el logo y el texto de la organización */
+    min-height: 50px;
+    /* Altura mínima para que la línea separadora sea fija */
+}
+
+.logo-curso {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    background-color: white;
+    /* Fondo blanco para que se vean bien los logos con transparencia */
+    border-radius: 6px;
+    padding: 2px;
+    margin-right: 15px;
+    /* Espacio entre logo y texto */
+    flex-shrink: 0;
+    /* Evita que el logo se encoja */
+}
+
+.curso-footer {
+    margin-top: auto;
+    /* Empuja el footer al final de la tarjeta */
+}
+
+.curso-card .institucion {
+    font-size: 0.95em;
+    color: #b3b3b3;
+    margin-bottom: 0;
+    font-weight: bold;
+    text-align: right;
+    flex-grow: 1;
+    /* Permite que el texto ocupe el espacio restante */
+}
+
+.curso-card .institucion a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.curso-card .institucion a:hover {
+    color: var(--color-acento-formativo);
+}
+
+.curso-card .meta-curso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+    color: #cccccc;
+}
+
+.meta-curso .horas {
+    font-weight: bold;
+    background-color: #282828;
+    padding: 3px 8px;
+    border-radius: 15px;
+}
+
+/* --- Filtros de Cursos (Slider de Rango) --- */
+.filtros-container {
+    margin-bottom: 30px;
+}
+
+.range-slider-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.range-values {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--color-acento-formativo);
+}
+
+.slider-wrapper {
+    position: relative;
+    height: 10px;
+}
+
+.slider-track {
+    position: absolute;
+    height: 4px;
+    background-color: var(--color-separador);
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 2px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background: transparent;
+    pointer-events: none;
+    /* El pulgar es el único que interactúa */
+    margin: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--color-acento-formativo);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    /* Habilitar interacción con el pulgar */
+    border: 3px solid var(--color-tarjeta);
+    box-shadow: 0 0 5px rgba(3, 194, 66, 0.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--color-acento-formativo);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    border: 3px solid var(--color-tarjeta);
+    box-shadow: 0 0 5px rgba(3, 194, 66, 0.5);
+}
