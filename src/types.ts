@@ -40,7 +40,7 @@ export interface ComplementaryTrainingItem {
     horas?: number;
 }
 
-export interface VolunteeringItem {
+export interface OtherExperienceItem {
     puesto: string;
     organizacion: string;
     fecha_inicio: string;
@@ -70,7 +70,7 @@ export interface ResumeData {
     experiencia: ExperienceItem[];
     formacion: EducationItem[];
     formacionComplementaria: ComplementaryTrainingItem[];
-    voluntariado: VolunteeringItem[];
+    otraExperiencia: OtherExperienceItem[];
     habilidades: SkillItem[];
     proyectos: ProjectItem[];
 }

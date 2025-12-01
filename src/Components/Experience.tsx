@@ -89,8 +89,8 @@ function Experience({ experience, education }: ExperienceProps) {
     });
 
     return (
-        <section id="experience" className="py-16 md:py-24 bg-slate-900 relative">
-            <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+        <section id="experience" className="py-8 md:py-12 bg-slate-900 relative">
+            <div className="max-w-6xl mx-auto px-6 lg:px-8 z-10">
                 <div className="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-sm py-4 mb-12 -mx-6 px-6 border-b border-violet-500/10 transition-all duration-300">
                     <div
                         className="flex items-center justify-center gap-4 cursor-pointer group"

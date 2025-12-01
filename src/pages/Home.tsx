@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Hero from '../Components/Hero';
 import Experience from '../Components/Experience';
 import ComplementaryTraining from '../Components/ComplementaryTraining';
-import Volunteering from '../Components/Volunteering';
+import OtherExperience from '../Components/OtherExperience';
 import Skills from '../Components/Skills';
 import Portfolio from '../Components/Portfolio';
 import type { ResumeData } from '../types';
@@ -32,7 +32,7 @@ function Home({ data }: HomeProps) {
             <Hero profile={data.perfil} />
             <Experience experience={data.experiencia} education={data.formacion} />
             <ComplementaryTraining items={data.formacionComplementaria} />
-            <Volunteering items={data.voluntariado} />
+            <OtherExperience items={data.otraExperiencia} />
             <Skills skills={data.habilidades} />
             <Portfolio projects={data.proyectos} />
         </>
@@ -40,4 +40,3 @@ function Home({ data }: HomeProps) {
 }
 
 export default Home;
-

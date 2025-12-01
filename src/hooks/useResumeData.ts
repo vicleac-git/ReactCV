@@ -120,9 +120,9 @@ export function useResumeData() {
                         horas: item.horas
                     }));
 
-                // Extract voluntariado
-                const voluntariadoData = rawData
-                    .filter((item: any) => item.tipo === 'Voluntariado')
+                // Extract otra experiencia
+                const otraExperienciaData = rawData
+                    .filter((item: any) => item.tipo === 'Otra experiencia')
                     .map((item: any) => ({
                         puesto: item.puesto || '',
                         organizacion: item.organizacion || '',
@@ -164,7 +164,7 @@ export function useResumeData() {
                     experiencia: experienciaData,
                     formacion: formacionData,
                     formacionComplementaria: formacionComplementariaData,
-                    voluntariado: voluntariadoData,
+                    otraExperiencia: otraExperienciaData,
                     habilidades: habilidadesData,
                     proyectos: proyectosData
                 };
