@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CookieConsent } from './Components/CookieConsent';
 
 import { useResumeData } from './hooks/useResumeData';
@@ -41,6 +41,7 @@ function App() {
           <Route path="/proyecto-consulta-ull" element={<ProjectConsultaUll />} />
           <Route path="/proyecto-encuesta-organizacional" element={<ProjectEncuestaOrganizacional />} />
           <Route path="/proyecto-herramientas-baremacion-ull" element={<ProjectHerramientasBaremacion />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
 
         </Route>
       </Routes>
