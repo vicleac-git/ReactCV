@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import type { Profile } from '../types';
 
 interface NavbarProps {
@@ -8,6 +8,7 @@ interface NavbarProps {
 
 function Navbar({ profile }: NavbarProps) {
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
@@ -24,14 +25,18 @@ function Navbar({ profile }: NavbarProps) {
     }, []);
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-        // If we are already on the home page, prevent default navigation and scroll smoothly
-        if (location.pathname === '/') {
-            e.preventDefault();
+        e.preventDefault();
+
+        // If we're not on the home page, navigate to home first
+        if (location.pathname !== '/') {
+            navigate(`/#${id}`);
+        } else {
+            // We're on home, just scroll
             const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
-                // Optionally update URL hash without scrolling (since we did it manually)
-                window.history.pushState(null, '', `/#${id}`);
+                // Update hash without triggering navigation
+                window.history.replaceState(null, '', `#${id}`);
             }
         }
     };
@@ -41,27 +46,27 @@ function Navbar({ profile }: NavbarProps) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo/Nombre */}
-                    <Link
-                        to="/#hero"
+                    <a
+                        href="#hero"
                         onClick={(e) => handleNavClick(e, 'hero')}
                         className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(139,92,246,0.9)] hover:scale-105"
                     >
                         Víctor Leal Acosta
-                    </Link>
+                    </a>
                     {/* Enlaces de Navegación */}
                     <div className="hidden sm:flex items-center space-x-8">
                         {['Sobre mí', 'Experiencia', 'Habilidades', 'Portafolio'].map((item) => {
                             const id = item === 'Sobre mí' ? 'hero' : item === 'Experiencia' ? 'experience' : item === 'Habilidades' ? 'skills' : 'portfolio';
                             return (
-                                <Link
+                                <a
                                     key={item}
-                                    to={`/#${id}`}
+                                    href={`#${id}`}
                                     onClick={(e) => handleNavClick(e, id)}
                                     className="text-gray-300 hover:text-cyan-400 font-medium transition duration-300 relative group"
                                 >
                                     {item}
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_#22d3ee]"></span>
-                                </Link>
+                                </a>
                             );
                         })}
                         {/* Botón Contáctame */}
