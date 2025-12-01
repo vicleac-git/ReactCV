@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { projectsData } from '../data/projects';
+import { getAssetPath } from '../utils/assets';
 
 function ProjectHerramientasBaremacion() {
     const project = projectsData.find(p => p.url === '/proyecto-herramientas-baremacion-ull');
@@ -13,7 +14,7 @@ function ProjectHerramientasBaremacion() {
     return (
         <section className="max-w-6xl mx-auto px-6 py-12">
             <div className="relative rounded-2xl overflow-hidden mb-8 h-96 shadow-2xl">
-                <img src="/herramientas-baremacion-ull.png" alt="Herramientas de Baremación ULL" className="w-full h-full object-cover" />
+                <img src={getAssetPath("/herramientas-baremacion-ull.png")} alt="Herramientas de Baremación ULL" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8">
                     <div id="tecnologias-container" className="flex flex-wrap gap-2 mb-4">

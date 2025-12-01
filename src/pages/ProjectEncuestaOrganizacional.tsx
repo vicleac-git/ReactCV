@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { projectsData } from '../data/projects';
+import { getAssetPath } from '../utils/assets';
 
 function ProjectEncuestaOrganizacional() {
     const project = projectsData.find(p => p.url === '/proyecto-encuesta-organizacional');
@@ -13,7 +14,7 @@ function ProjectEncuestaOrganizacional() {
     return (
         <section className="max-w-6xl mx-auto px-6 py-12">
             <div className="relative rounded-2xl overflow-hidden mb-8 h-96 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=600&fit=crop"
+                <img src={getAssetPath("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=600&fit=crop")}
                     alt="Encuesta Organizacional" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8">
