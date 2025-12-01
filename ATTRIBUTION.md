@@ -10,7 +10,7 @@ Eres libre de usar el código como referencia o base para tu propio portafolio. 
 
 ## Contenido Personal
 
-### © 2024 Víctor Leal Acosta - Todos los derechos reservados
+### © 2025 Víctor Leal Acosta - Todos los derechos reservados
 
 Los siguientes elementos son de mi autoría y uso personal:
 - Fotografía de perfil (`profile.jpg`)
@@ -62,4 +62,4 @@ Si tienes alguna pregunta sobre el uso de este código o necesitas permisos espe
 
 ---
 
-**Última actualización**: Diciembre 2024
+**Última actualización**: Diciembre 2025
