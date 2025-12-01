@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ResumeData } from '../types';
 import { projectsData as staticProjects } from '../data/projects';
+import { getAssetPath } from '../utils/assets';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -74,8 +75,8 @@ export function useResumeData() {
                     resumen: perfilItem?.detalle || '',
                     email: 'vicleac@gmail.com',
                     linkedin: 'https://www.linkedin.com/in/vicleac/',
-                    github: 'https://github.com/vicleac',
-                    foto: '/profile.jpg'
+                    github: 'https://github.com/vicleac-git',
+                    foto: getAssetPath('/profile.jpg')
                 };
 
                 // Extract experiencia profesional
@@ -153,7 +154,10 @@ export function useResumeData() {
                     }));
 
                 // Merge: Static Projects + API Projects
-                const proyectosData = [...staticProjects, ...apiProjects];
+                const proyectosData = [...staticProjects, ...apiProjects].map(project => ({
+                    ...project,
+                    imagen: getAssetPath(project.imagen)
+                }));
 
                 const transformedData: ResumeData = {
                     perfil: perfilData,
