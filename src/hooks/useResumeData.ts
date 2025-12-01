@@ -132,8 +132,6 @@ export function useResumeData() {
                         descripcion: item.detalle || ''
                     }));
 
-                console.log('Voluntariado data:', voluntariadoData);
-
                 // Extract habilidades
                 const habilidadesData = rawData
                     .filter((item: any) => item.tipo === 'Habilidad')
@@ -167,11 +165,9 @@ export function useResumeData() {
                     proyectos: proyectosData
                 };
 
-                console.log('Transformed data:', transformedData);
                 setData(transformedData);
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'An error occurred');
-                console.error("Error fetching data:", err);
             } finally {
                 setLoading(false);
             }
