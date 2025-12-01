@@ -31,7 +31,7 @@ function App() {
   if (!data) return null;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<MainLayout profile={data.perfil} />}>
           <Route path="/" element={<Home data={data} />} />
