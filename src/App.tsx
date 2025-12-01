@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CookieConsent } from './Components/CookieConsent';
 
 import { useResumeData } from './hooks/useResumeData';
 import MainLayout from './layouts/MainLayout';
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <CookieConsent />
       <Routes>
         <Route element={<MainLayout profile={data.perfil} />}>
           <Route path="/" element={<Home data={data} />} />
