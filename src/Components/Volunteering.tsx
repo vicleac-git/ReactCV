@@ -59,15 +59,6 @@ function Volunteering({ items }: VolunteeringProps) {
                   </div>
                 </div>
 
-                {/* Descripción - Centro de la tarjeta */}
-                {item.descripcion && (
-                  <div className="flex-grow my-3">
-                    <p className="text-gray-400 text-sm leading-relaxed text-justify">
-                      {item.descripcion}
-                    </p>
-                  </div>
-                )}
-
                 {/* Footer con fechas */}
                 <div className="flex justify-between items-center text-sm mt-3 pt-3 border-t border-gray-700">
                   <p className="text-cyan-400 font-mono text-xs">

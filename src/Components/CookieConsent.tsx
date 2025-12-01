@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { initializeGA } from '../utils/analytics';
+import { grantConsent } from '../utils/analytics';
 
 export const CookieConsent: React.FC = () => {
     const [showBanner, setShowBanner] = useState(false);
@@ -9,13 +9,13 @@ export const CookieConsent: React.FC = () => {
         if (consent === null) {
             setShowBanner(true);
         } else if (consent === 'granted') {
-            initializeGA();
+            grantConsent();
         }
     }, []);
 
     const handleAccept = () => {
         localStorage.setItem('cookie_consent', 'granted');
-        initializeGA();
+        grantConsent();
         setShowBanner(false);
     };
 
