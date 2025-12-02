@@ -22,7 +22,7 @@ function Hero({ profile }: HeroProps) {
                 <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
                     Hola, soy
                     <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400 block mt-2 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(139,92,246,0.9)] hover:scale-105 cursor-pointer">{profile.nombre}</span>
+                    <button type="button" className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-400 block mt-2 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(139,92,246,0.9)] hover:scale-105 cursor-pointer text-4xl sm:text-6xl lg:text-7xl font-extrabold border-none bg-transparent p-0 mx-auto">{profile.nombre}</button>
                 </h1>
                 <p className="text-xl sm:text-2xl font-light mb-10 text-gray-300">
                     {profile.titulo}

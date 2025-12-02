@@ -40,6 +40,12 @@ body {
     text-rendering: optimizeLegibility;
 }
 
+/* Accesibilidad: Indicador de foco global */
+:focus-visible {
+    outline: 2px solid var(--neon-primary);
+    outline-offset: 2px;
+}
+
 .neon-text {
     /* Refined neon effect: Blue text with reduced, subtle glow */
     text-shadow:
