@@ -31,7 +31,7 @@ export const CookieConsent: React.FC = () => {
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-sm text-gray-300">
                     <p>
-                        Utilizamos cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia de navegación.
+                        Este sitio web utiliza cookies propias y de terceros para analizar el tráfico y mejorar tu experiencia de navegación.
                         Al hacer clic en "Aceptar", consientes el uso de estas cookies.
                     </p>
                 </div>

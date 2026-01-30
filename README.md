@@ -1,21 +1,21 @@
 # CV Interactivo - Víctor Leal Acosta
 
-🌐 **[Ver sitio en vivo](https://vicleac-git.github.io/ReactCV/)**
+**[Ver sitio en vivo](https://vicleac-git.github.io/ReactCV/)**
 
 CV interactivo y dinámico desarrollado con React, TypeScript y Vite. Los datos se gestionan de forma dinámica mediante Google Sheets API, permitiendo actualizaciones sin necesidad de redesplegar.
 
-## ✨ Características
+## Características
 
-- 🎨 **Diseño Moderno**: Interfaz elegante con gradientes violet/cyan y efectos glassmorphism
-- 📱 **Totalmente Responsive**: Optimizado para dispositivos móviles, tablets y escritorio
-- 🔄 **Contenido Dinámico**: Datos actualizables en tiempo real desde Google Sheets
-- 🎭 **Animaciones Suaves**: Transiciones fluidas y efectos hover interactivos
-- 🌐 **Múltiples Páginas**: Secciones detalladas para cada proyecto
-- 📧 **Contacto Directo**: Botón de contacto siempre visible en el navbar
-- ⚡ **Rendimiento Optimizado**: Build ligero (342 KB JS, 14 KB CSS)
-- 🔒 **Seguridad**: Sanitización de HTML con DOMPurify
+- **Diseño Moderno**: Interfaz elegante con gradientes violet/cyan y efectos glassmorphism
+- **Totalmente Responsive**: Optimizado para dispositivos móviles, tablets y escritorio
+- **Contenido Dinámico**: Datos actualizables en tiempo real desde Google Sheets
+- **Animaciones Suaves**: Transiciones fluidas y efectos hover interactivos
+- **Múltiples Páginas**: Secciones detalladas para cada proyecto
+- **Contacto Directo**: Botón de contacto siempre visible en el navbar
+- **Rendimiento Optimizado**: Build ligero (342 KB JS, 14 KB CSS)
+- **Seguridad**: Sanitización de HTML con DOMPurify
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **React 19**: Última versión con rendering optimizado
 - **TypeScript**: Tipado estático para mayor robustez
@@ -25,7 +25,7 @@ CV interactivo y dinámico desarrollado con React, TypeScript y Vite. Los datos 
 - **DOMPurify**: Protección contra XSS
 - **Google Sheets API**: Backend sin servidor para gestión de datos
 
-## 📦 Instalación Local
+## Instalación Local
 
 ```bash
 # Clonar el repositorio
@@ -33,19 +33,19 @@ git clone https://github.com/vicleac-git/ReactCV.git
 cd ReactCV
 
 # Instalar dependencias
-npm install
+pnpm install
 
 # Configurar variables de entorno
 # Crear archivo .env con:
 # VITE_API_URL=tu_url_de_google_sheets_api
 
 # Iniciar servidor de desarrollo
-npm run dev
+pnpm run dev
 ```
 
 El sitio estará disponible en `http://localhost:5173`
 
-## 🏗️ Build de Producción
+## Build de Producción
 
 ```bash
 # Compilar para producción
@@ -55,7 +55,7 @@ npm run build
 npm run preview
 ```
 
-## 🚀 Despliegue
+## Despliegue
 
 El proyecto se despliega automáticamente en **GitHub Pages** mediante GitHub Actions:
 
@@ -84,7 +84,7 @@ El proyecto se despliega automáticamente en **GitHub Pages** mediante GitHub Ac
    └── package.json
    ```
 
-## 📊 Gestión de Contenido
+## Gestión de Contenido
 
 Los datos del CV se gestionan desde Google Sheets:
 
@@ -95,7 +95,7 @@ Los datos del CV se gestionan desde Google Sheets:
 - **Otra Experiencia**: Otro tipo de experiencia profesional (voluntariados, proyectos puntuales, etc.)
 - **Portfolio**: Proyectos destacados con detalles
 
-## 🎯 Secciones Principales
+## Secciones Principales
 
 - **Hero**: Presentación con foto y resumen
 - **Experiencia**: Timeline de experiencia profesional y educación
@@ -104,16 +104,16 @@ Los datos del CV se gestionan desde Google Sheets:
 - **Formación**: Cursos y certificaciones con filtros por año
 - **Otra Experiencia**: Colaboraciones y proyectos sociales
 
-## 🔧 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
-npm run dev      # Servidor de desarrollo
-npm run build    # Build de producción
-npm run preview  # Preview del build
-npm run lint     # Ejecutar ESLint
+pnpm run dev      # Servidor de desarrollo
+pnpm run build    # Build de producción
+pnpm run preview  # Preview del build
+pnpm run lint     # Ejecutar ESLint
 ```
 
-## 📝 Licencia y Derechos de Autor
+## Licencia y Derechos de Autor
 
 Este proyecto está bajo **licencia MIT** (ver archivo [LICENSE](LICENSE)).
 
@@ -126,7 +126,7 @@ Eres libre de usar el código como referencia para tu propio portafolio. Por fav
 ### Contenido e Imágenes
 El contenido personal, fotografías y descripciones de proyectos están protegidos por derechos de autor.
 
-📄 **Ver detalles completos**: [ATTRIBUTION.md](ATTRIBUTION.md)
+**Ver detalles completos**: [ATTRIBUTION.md](ATTRIBUTION.md)
 
 ---
 
