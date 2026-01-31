@@ -12,7 +12,6 @@ CV interactivo y dinámico desarrollado con React, TypeScript y Vite. Los datos 
 - **Animaciones Suaves**: Transiciones fluidas y efectos hover interactivos
 - **Múltiples Páginas**: Secciones detalladas para cada proyecto
 - **Contacto Directo**: Botón de contacto siempre visible en el navbar
-- **Rendimiento Optimizado**: Build ligero (342 KB JS, 14 KB CSS)
 - **Seguridad**: Sanitización de HTML con DOMPurify
 
 ## Tecnologías

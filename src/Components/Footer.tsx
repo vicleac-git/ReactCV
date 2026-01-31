@@ -1,4 +1,5 @@
 import type { Profile } from '../types';
+import { APP_VERSION } from '../constants';
 
 interface FooterProps {
   profile: Profile;
@@ -30,6 +31,9 @@ function Footer({ profile }: FooterProps) {
 
         <p className="text-sm text-slate-400">
           &copy; <span id="current-year">{currentYear}</span> {profile.nombre}. Todos los derechos reservados.
+        </p>
+        <p className="text-xs text-slate-600 mt-2 font-mono">
+          v{APP_VERSION}
         </p>
       </div>
     </footer>
