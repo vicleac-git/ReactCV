@@ -220,31 +220,48 @@ function Skills({ skills = [] }: SkillsProps) {
           <div className="space-y-12">
             {/* Technical Skills Section */}
             <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-cyan-500/10 hover:border-cyan-500/20 transition-all duration-300">
-              <h3 className="text-xl font-semibold text-cyan-300 mb-6 border-b border-cyan-500/20 pb-2 inline-block">
-                Habilidades técnicas
-              </h3>
+              <div className="mb-6 border-b border-cyan-500/20 pb-2">
+                <h3 className="text-xl font-semibold text-cyan-300 inline-block">
+                  Habilidades técnicas
+                </h3>
+              </div>
 
               {sortedSkills.length > 0 ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {sortedSkills.map((skill, index) => (
                     <div
                       key={index}
-                      className="bg-slate-900/40 backdrop-blur-sm p-4 rounded-xl border border-slate-700/50 hover:border-cyan-500/50 hover:bg-cyan-900/20 transition-all duration-300 group flex flex-col items-center gap-2 text-center hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10"
+                      className="group h-40 [perspective:1000px] hover:-translate-y-1 transition-transform duration-300"
                     >
-                      <div className="w-10 h-10 flex items-center justify-center p-1 bg-slate-950/50 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                        <img
-                          src={getLogo(skill)}
-                          alt={skill.nombre}
-                          className="w-full h-full object-contain filter brightness-90 group-hover:brightness-100"
-                          loading="lazy"
-                          onError={(e) => { e.currentTarget.src = DEFAULT_LOGO; }}
-                        />
+                      <div className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                        {/* Front Face */}
+                        <div className="absolute inset-0 h-full w-full [backface-visibility:hidden] bg-slate-900/40 backdrop-blur-sm p-4 rounded-xl border border-slate-700/50 group-hover:border-cyan-500/50 group-hover:bg-cyan-900/20 transition-all duration-300 flex flex-col items-center justify-center gap-2 text-center shadow-lg">
+                          <div className="w-10 h-10 flex items-center justify-center p-1 bg-slate-950/50 rounded-lg transition-transform duration-300">
+                            <img
+                              src={getLogo(skill)}
+                              alt={skill.nombre}
+                              className="w-full h-full object-contain filter brightness-90 group-hover:brightness-100"
+                              loading="lazy"
+                              onError={(e) => { e.currentTarget.src = DEFAULT_LOGO; }}
+                            />
+                          </div>
+                          <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors line-clamp-2">
+                            {skill.nombre}
+                          </span>
+                          {/* Render skill level dots if level is present */}
+                          <div className="w-full">
+                            {skill.nivel && renderSkillLevel(skill.nivel)}
+                          </div>
+                        </div>
+
+                        {/* Back Face */}
+                        <div className="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden] bg-slate-800 p-4 rounded-xl border border-cyan-500/50 flex flex-col items-center justify-center text-center shadow-xl bg-gradient-to-br from-slate-800 to-slate-900">
+                          <h4 className="text-cyan-400 text-xs font-bold mb-2 uppercase tracking-wider">Detalle</h4>
+                          <p className="text-xs text-gray-300 leading-relaxed overflow-y-auto max-h-full scrollbar-thin scrollbar-thumb-cyan-900 scrollbar-track-transparent px-1">
+                            {skill.detalle}
+                          </p>
+                        </div>
                       </div>
-                      <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                        {skill.nombre}
-                      </span>
-                      {/* Render skill level dots if level is present */}
-                      {skill.nivel && renderSkillLevel(skill.nivel)}
                     </div>
                   ))}
                 </div>

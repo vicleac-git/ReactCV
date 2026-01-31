@@ -139,7 +139,8 @@ export function useResumeData() {
                     .map((item: any) => ({
                         nombre: item.puesto || '',
                         nivel: item.organizacion || '',
-                        icono: item.logo
+                        icono: item.logo,
+                        detalle: item.detalle || ''
                     }));
 
                 // Extract proyectos from API

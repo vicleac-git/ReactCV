@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { CookieConsent } from './Components/CookieConsent';
 
+import SkeletonHero from './Components/SkeletonHero';
 import { useResumeData } from './hooks/useResumeData';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
@@ -14,11 +15,7 @@ function App() {
   const { data, loading, error } = useResumeData();
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-slate-900 text-white">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-violet-500"></div>
-      </div>
-    );
+    return <SkeletonHero />;
   }
 
   if (error) {
@@ -50,5 +47,3 @@ function App() {
 }
 
 export default App;
-
-

@@ -54,6 +54,7 @@ export interface SkillItem {
     nombre: string;
     nivel: string;
     icono?: string; // SVG path or url
+    detalle?: string;
 }
 
 export interface ProjectItem {

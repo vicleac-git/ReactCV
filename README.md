@@ -21,7 +21,7 @@ CV interactivo y dinámico desarrollado con React, TypeScript y Vite. Los datos 
 - **TypeScript**: Tipado estático para mayor robustez
 - **Vite**: Build tool ultra-rápido
 - **React Router DOM**: Navegación SPA sin recargas
-- **Vanilla CSS**: Estilos personalizados sin frameworks pesados
+- **Tailwind CSS**: Framework de utilidad para diseño rápido y responsivo
 - **DOMPurify**: Protección contra XSS
 - **Google Sheets API**: Backend sin servidor para gestión de datos
 
@@ -49,10 +49,10 @@ El sitio estará disponible en `http://localhost:5173`
 
 ```bash
 # Compilar para producción
-npm run build
+pnpm run build
 
 # Previsualizar build localmente
-npm run preview
+pnpm run preview
 ```
 
 ## Despliegue
