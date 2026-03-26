@@ -5,11 +5,7 @@ import SkeletonHero from './Components/SkeletonHero';
 import { useResumeData } from './hooks/useResumeData';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
-import ProjectDemola from './pages/ProjectDemola';
-import ProjectConsultaUll from './pages/ProjectConsultaUll';
-import ProjectEncuestaOrganizacional from './pages/ProjectEncuestaOrganizacional';
-import ProjectHerramientasBaremacion from './pages/ProjectHerramientasBaremacion';
-
+import DynamicProjectPage from './pages/DynamicProjectPage';
 
 function App() {
   const { data, loading, error } = useResumeData();
@@ -34,10 +30,7 @@ function App() {
       <Routes>
         <Route element={<MainLayout profile={data.perfil} />}>
           <Route path="/" element={<Home data={data} />} />
-          <Route path="/proyecto-demola-canarias" element={<ProjectDemola />} />
-          <Route path="/proyecto-consulta-ull" element={<ProjectConsultaUll />} />
-          <Route path="/proyecto-encuesta-organizacional" element={<ProjectEncuestaOrganizacional />} />
-          <Route path="/proyecto-herramientas-baremacion-ull" element={<ProjectHerramientasBaremacion />} />
+          <Route path="/proyecto-*" element={<DynamicProjectPage data={data} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Route>

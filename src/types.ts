@@ -64,6 +64,9 @@ export interface ProjectItem {
     url: string;
     tecnologias: string[];
     competencias?: string[];
+    organizacion?: string;
+    detalle_extendido?: string;
+    estado?: string;
 }
 
 export interface ResumeData {

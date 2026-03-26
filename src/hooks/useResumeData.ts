@@ -151,7 +151,11 @@ export function useResumeData() {
                         descripcion: item.detalle || '',
                         imagen: item.logo || '',
                         url: item.url_organizacion || '',
-                        tecnologias: []
+                        tecnologias: item.herramientas ? item.herramientas.split(',').map((t: string) => t.trim()) : [],
+                        competencias: item.competencias ? item.competencias.split(',').map((c: string) => c.trim()) : [],
+                        organizacion: item.organizacion,
+                        detalle_extendido: formatExtendedDetails(item.detalle_extendido || ''),
+                        estado: item.horas // Reutilizamos 'horas' para el estado si prefieres
                     }));
 
                 // Merge: Static Projects + API Projects

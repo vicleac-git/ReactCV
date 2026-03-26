@@ -85,14 +85,31 @@ El proyecto se despliega automáticamente en **GitHub Pages** mediante GitHub Ac
 
 ## Gestión de Contenido
 
-Los datos del CV se gestionan desde Google Sheets:
+Los datos del CV se gestionan íntegramente desde Google Sheets, actuando como un CMS ligero:
 
 - **Perfil**: Información personal y resumen
 - **Experiencia**: Historial profesional y académico
 - **Habilidades**: Skills técnicas y blandas
 - **Formación Complementaria**: Cursos y certificaciones
 - **Otra Experiencia**: Otro tipo de experiencia profesional (voluntariados, proyectos puntuales, etc.)
-- **Portfolio**: Proyectos destacados con detalles
+
+### Estructura de Proyectos (Portfolio)
+Para añadir o modificar proyectos, utiliza las siguientes columnas en la hoja de cálculo:
+
+| Columna | Descripción |
+| :--- | :--- |
+| **tipo** | Debe ser `Proyecto` |
+| **puesto** | Título del proyecto |
+| **organizacion** | Cliente o institución |
+| **detalle** | Descripción corta para la tarjeta del portfolio |
+| **logo** | Ruta de la imagen (ej: `/mi-proyecto.png`) |
+| **url_organizacion**| Slug de la URL (ej: `/proyecto-nuevo`) |
+| **herramientas** | Tecnologías separadas por comas |
+| **competencias** | Soft skills separadas por comas |
+| **horas** | Estado del proyecto (ej: "En producción") |
+| **detalle_extendido**| Contenido rico (usa `•` para listas y emojis para encabezados) |
+
+El sistema renderiza automáticamente estas filas usando el componente `DynamicProjectPage`.
 
 ## Secciones Principales
 
@@ -128,5 +145,3 @@ El contenido personal, fotografías y descripciones de proyectos están protegid
 **Ver detalles completos**: [ATTRIBUTION.md](ATTRIBUTION.md)
 
 ---
-
-**Desarrollado con ❤️ por Víctor Leal Acosta usando React + TypeScript + Vite**
