@@ -92,7 +92,7 @@ export function useResumeData() {
                         fecha_inicio: item.fecha_inicio || '',
                         fecha_fin: item.fecha_fin || '',
                         descripcion: item.detalle || '',
-                        logo: item.logo,
+                        logo: item.logo ? getAssetPath(item.logo) : undefined,
                         url_empresa: item.url_organizacion,
                         herramientas: item.herramientas || '',
                         detalle_extendido: formatExtendedDetails(item.detalle_extendido || '')
@@ -107,7 +107,7 @@ export function useResumeData() {
                         fecha_inicio: item.fecha_inicio || '',
                         fecha_fin: item.fecha_fin || '',
                         descripcion: item.detalle || '',
-                        logo: item.logo,
+                        logo: item.logo ? getAssetPath(item.logo) : undefined,
                         url_organizacion: item.url_organizacion
                     }));
 
@@ -119,7 +119,7 @@ export function useResumeData() {
                         organizacion: item.organizacion || '',
                         fecha_inicio: item.fecha_inicio || '',
                         fecha_fin: item.fecha_fin || '',
-                        logo: item.logo,
+                        logo: item.logo ? getAssetPath(item.logo) : undefined,
                         url_organizacion: item.url_organizacion,
                         horas: item.horas
                     }));
@@ -132,7 +132,7 @@ export function useResumeData() {
                         organizacion: item.organizacion || '',
                         fecha_inicio: item.fecha_inicio || '',
                         fecha_fin: item.fecha_fin || '',
-                        logo: item.logo,
+                        logo: item.logo ? getAssetPath(item.logo) : undefined,
                         url_organizacion: item.url_organizacion,
                         descripcion: item.detalle || ''
                     }));
@@ -143,7 +143,7 @@ export function useResumeData() {
                     .map((item: any) => ({
                         nombre: item.puesto || '',
                         nivel: item.organizacion || '',
-                        icono: item.logo,
+                        icono: item.logo ? getAssetPath(item.logo) : undefined,
                         detalle: item.detalle || ''
                     }));
 

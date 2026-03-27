@@ -133,7 +133,7 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                                 <div className="relative group mb-8">
                                     <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                                     <img 
-                                        src={getAssetPath(selectedProject.imagen)} 
+                                        src={selectedProject.imagen} 
                                         alt={selectedProject.titulo} 
                                         className="relative w-full h-48 md:h-56 object-cover rounded-2xl border border-white/10"
                                     />
