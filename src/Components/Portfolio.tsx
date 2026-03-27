@@ -59,50 +59,53 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                 </div>
 
                 {!isCollapsed && (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {projects.map((project, index) => (
-                            <div key={index} className="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] border border-violet-500/20 hover:border-violet-400 group flex flex-col h-full">
-                                <div className="relative overflow-hidden h-48">
+                            <div 
+                                key={index} 
+                                className="group relative bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/10 overflow-hidden flex flex-col h-full transition-all duration-500 hover:-translate-y-1 hover:border-violet-500/40 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+                            >
+                                {/* Contenedor de Imagen con Proporción Fija */}
+                                <div className="relative aspect-video overflow-hidden m-4 rounded-2xl bg-slate-900">
                                     <img
                                         src={project.imagen}
                                         alt={project.titulo}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                        onError={(e) => { e.currentTarget.src = 'https://placehold.co/600x400/1e293b/ffffff?text=Proyecto'; }}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        onError={(e) => { e.currentTarget.src = 'https://placehold.co/800x450/1e293b/ffffff?text=Proyecto'; }}
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    
+                                    {/* Badge de Estado flotando sobre la imagen */}
+                                    {project.estado && (
+                                        <div className="absolute top-3 right-3">
+                                            <span className="px-2.5 py-1 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
+                                                {project.estado}
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="p-6 flex flex-col flex-grow">
-                                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-violet-400 transition-colors">{project.titulo}</h4>
-                                    <p className="text-gray-400 mb-4 text-sm leading-relaxed line-clamp-3" title={project.descripcion}>
+
+                                {/* Contenido de la Tarjeta */}
+                                <div className="px-6 pb-6 flex flex-col flex-grow relative">
+                                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                                        {project.titulo}
+                                    </h4>
+                                    <p className="text-gray-400 text-sm leading-relaxed mb-4 pr-14">
                                         {project.descripcion}
                                     </p>
 
-                                    {/* Tecnologías */}
-                                    <div className="flex flex-wrap gap-2 mb-4">
-                                        {project.tecnologias && project.tecnologias.map((tech, i) => (
-                                            <span key={`tech-${i}`} className="text-xs font-medium px-2.5 py-0.5 rounded bg-cyan-900/50 text-cyan-300 border border-cyan-500/30">
-                                                {tech}
+                                    {/* El Botón Magnético Re-imaginado */}
+                                    <button 
+                                        onClick={() => setSelectedProject(project)}
+                                        className="absolute bottom-5 right-5 w-10 h-10 flex items-center justify-center rounded-full bg-slate-700/50 border border-white/10 text-white transition-all duration-500 group-hover:w-28 group-hover:bg-violet-600 group-hover:border-violet-400 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] overflow-hidden"
+                                    >
+                                        <div className="flex items-center justify-center relative w-full">
+                                            <ExternalLink size={16} className="shrink-0 group-hover:rotate-12 transition-transform duration-500" />
+                                            <span className="text-[10px] font-bold max-w-0 opacity-0 group-hover:max-w-xs group-hover:opacity-100 group-hover:ml-2 transition-all duration-500 whitespace-nowrap overflow-hidden">
+                                                Detalles
                                             </span>
-                                        ))}
-                                        {project.competencias && project.competencias.map((comp, i) => (
-                                            <span key={`comp-${i}`} className="text-xs font-medium px-2.5 py-0.5 rounded bg-violet-900/50 text-violet-300 border border-violet-500/30">
-                                                {comp}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    {isInternalLink(project.url) ? (
-                                        <button 
-                                            onClick={() => setSelectedProject(project)}
-                                            className="inline-flex items-center text-cyan-400 font-medium hover:text-cyan-300 transition duration-300 group-hover:translate-x-1 mt-auto text-left"
-                                        >
-                                            Ver detalles del proyecto <span className="ml-1">&rarr;</span>
-                                        </button>
-                                    ) : (
-                                        <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-cyan-400 font-medium hover:text-cyan-300 transition duration-300 group-hover:translate-x-1 mt-auto">
-                                            Ver detalles del proyecto <span className="ml-1">&rarr;</span>
-                                        </a>
-                                    )}
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         ))}

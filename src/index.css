@@ -92,3 +92,16 @@ body {
 
 .fade-in { animation-name: fadeIn; }
 .zoom-in { animation-name: zoomIn; }
+
+/* Estilo de Bento Grid para ajustar aspecto de imágenes */
+.bento-card-image {
+    mask-image: linear-gradient(to top, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+}
+
+/* Ajuste fino para la cuadrícula en móviles */
+@media (max-width: 768px) {
+    .auto-rows-\[280px\] {
+        auto-rows: minmax(320px, auto);
+    }
+}
