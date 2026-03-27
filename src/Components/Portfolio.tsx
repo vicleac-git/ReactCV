@@ -35,10 +35,6 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
         };
     }, [selectedProject]);
 
-    const isInternalLink = (url: string) => {
-        return url.startsWith('/');
-    };
-
     return (
         <section id="portfolio" className="py-6 md:py-10 bg-slate-900 relative">
             <div className="max-w-6xl mx-auto px-6 lg:px-8 z-10">
@@ -207,17 +203,6 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                                 </div>
 
                                 <div className="mt-auto flex flex-col gap-3">
-                                    {!isInternalLink(selectedProject.url) && (
-                                        <a 
-                                            href={selectedProject.url} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="flex items-center justify-center gap-2 w-full py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl transition-all font-bold text-sm shadow-lg shadow-violet-900/20"
-                                        >
-                                            Visitar Proyecto <ExternalLink size={16} />
-                                        </a>
-                                    )}
-                                    
                                     {selectedProject.repositorio_github && (
                                         <a 
                                             href={selectedProject.repositorio_github} 
