@@ -65,6 +65,8 @@ export interface ProjectItem {
     tecnologias: string[];
     competencias?: string[];
     organizacion?: string;
+    fecha_inicio?: string;
+    fecha_fin?: string;
     detalle_extendido?: string;
     estado?: string;
 }

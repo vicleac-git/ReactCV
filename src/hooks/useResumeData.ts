@@ -22,6 +22,11 @@ export function useResumeData() {
             const trimmedLine = line.trim();
             if (!trimmedLine) return;
 
+            // Resaltar palabras en MAYÚSCULAS (de 3 o más letras)
+            const highlightCaps = (str: string) => str.replace(/\b([A-ZÁÉÍÓÚÑ]{3,}(?:\s+[A-ZÁÉÍÓÚÑ]{2,})*)\b/g, 
+                '<span class="text-cyan-400 font-bold tracking-tight">$1</span>'
+            );
+
             if (trimmedLine.startsWith('•')) {
                 if (!inList) {
                     html += '<ul class="list-none space-y-1 mb-4">';
@@ -34,10 +39,10 @@ export function useResumeData() {
 
                 if (colonIndex !== -1) {
                     const concept = content.substring(0, colonIndex + 1); // Include colon
-                    const description = content.substring(colonIndex + 1);
-                    html += `<li class="text-gray-300 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-violet-400"><strong class="text-cyan-400 font-semibold">${concept}</strong>${description}</li>`;
+                    const description = highlightCaps(content.substring(colonIndex + 1));
+                    html += `<li class="text-gray-300 pl-6 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-cyan-500 before:rounded-full before:shadow-[0_0_8px_#22d3ee]"><strong class="text-white font-semibold">${concept}</strong>${description}</li>`;
                 } else {
-                    html += `<li class="text-gray-300 pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-violet-400">${content}</li>`;
+                    html += `<li class="text-gray-300 pl-6 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-cyan-500 before:rounded-full before:shadow-[0_0_8px_#22d3ee]">${highlightCaps(content)}</li>`;
                 }
             } else {
                 // Close list if open
@@ -46,7 +51,7 @@ export function useResumeData() {
                     inList = false;
                 }
                 // It's a header (emoji line)
-                html += `<h4 class="text-lg font-semibold text-violet-300 mt-4 mb-2 flex items-center gap-2">${trimmedLine}</h4>`;
+                html += `<h4 class="text-lg font-bold text-violet-300 mt-6 mb-3 border-b border-violet-500/20 pb-1">${highlightCaps(trimmedLine)}</h4>`;
             }
         });
 
@@ -154,6 +159,8 @@ export function useResumeData() {
                         tecnologias: item.herramientas ? item.herramientas.split(',').map((t: string) => t.trim()) : [],
                         competencias: item.competencias ? item.competencias.split(',').map((c: string) => c.trim()) : [],
                         organizacion: item.organizacion,
+                        fecha_inicio: item.fecha_inicio,
+                        fecha_fin: item.fecha_fin,
                         detalle_extendido: formatExtendedDetails(item.detalle_extendido || ''),
                         estado: item.horas // Reutilizamos 'horas' para el estado si prefieres
                     }));

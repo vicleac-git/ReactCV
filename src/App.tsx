@@ -5,7 +5,6 @@ import SkeletonHero from './Components/SkeletonHero';
 import { useResumeData } from './hooks/useResumeData';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
-import DynamicProjectPage from './pages/DynamicProjectPage';
 
 function App() {
   const { data, loading, error } = useResumeData();
@@ -30,7 +29,6 @@ function App() {
       <Routes>
         <Route element={<MainLayout profile={data.perfil} />}>
           <Route path="/" element={<Home data={data} />} />
-          <Route path="/:slug" element={<DynamicProjectPage data={data} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Route>
