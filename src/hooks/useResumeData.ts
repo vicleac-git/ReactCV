@@ -158,8 +158,15 @@ export function useResumeData() {
                         estado: item.horas // Reutilizamos 'horas' para el estado si prefieres
                     }));
 
-                // Merge: Static Projects + API Projects
-                const proyectosData = [...staticProjects, ...apiProjects].map(project => ({
+                // Merge: API Projects + Static Projects (evitando duplicados por URL)
+                const allProjects = [...apiProjects];
+                staticProjects.forEach(staticProj => {
+                    if (!allProjects.some(p => p.url === staticProj.url)) {
+                        allProjects.push(staticProj);
+                    }
+                });
+
+                const proyectosData = allProjects.map(project => ({
                     ...project,
                     imagen: getAssetPath(project.imagen)
                 }));
