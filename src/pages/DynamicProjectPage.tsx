@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation, Navigate } from 'react-router-dom';
+import { useLocation, useParams, Navigate } from 'react-router-dom';
 import { ResumeData } from '../types';
 import { getAssetPath } from '../utils/assets';
 import DOMPurify from 'dompurify';
@@ -10,8 +10,13 @@ interface DynamicProjectPageProps {
 
 function DynamicProjectPage({ data }: DynamicProjectPageProps) {
     const location = useLocation();
-    // Buscamos el proyecto que coincida con la ruta actual
-    const project = data.proyectos.find(p => p.url === location.pathname);
+    const { slug } = useParams();
+
+    // Buscamos el proyecto comparando el slug de la URL con el final del campo 'url' de los datos
+    const project = data.proyectos.find(p => {
+        const projectSlug = p.url.startsWith('/') ? p.url.substring(1) : p.url;
+        return projectSlug === slug;
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);

@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route element={<MainLayout profile={data.perfil} />}>
           <Route path="/" element={<Home data={data} />} />
-          <Route path="/proyecto-*" element={<DynamicProjectPage data={data} />} />
+          <Route path="/:slug" element={<DynamicProjectPage data={data} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Route>
