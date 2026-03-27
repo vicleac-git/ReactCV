@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { ResumeData } from '../types';
+import type { ResumeData, ProjectItem } from '../types';
 import { getAssetPath } from '../utils/assets';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -164,7 +164,7 @@ export function useResumeData() {
                         estado: item.horas // Reutilizamos 'horas' para el estado si prefieres
                     }));
 
-                const proyectosData = apiProjects.map(project => ({
+                const proyectosData = apiProjects.map((project: ProjectItem) => ({
                     ...project,
                     imagen: getAssetPath(project.imagen)
                 }));
