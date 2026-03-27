@@ -58,6 +58,8 @@ export interface SkillItem {
 }
 
 export interface ProjectItem {
+    nombre_proyecto?: string;
+    repositorio_github?: string;
     titulo: string;
     descripcion: string;
     imagen: string;

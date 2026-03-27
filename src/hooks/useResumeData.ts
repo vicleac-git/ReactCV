@@ -151,6 +151,8 @@ export function useResumeData() {
                 const apiProjects = rawData
                     .filter((item: any) => item.tipo === 'Proyecto')
                     .map((item: any) => ({
+                        nombre_proyecto: item.nombre_proyecto || item.puesto || '',
+                        repositorio_github: item.repositorio_github || '',
                         titulo: item.puesto || '',
                         descripcion: item.detalle || '',
                         imagen: item.logo || '',

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { ProjectItem } from '../types';
 import DOMPurify from 'dompurify';
-import { X, Calendar, Building2, Briefcase, Wrench, ExternalLink, Award } from 'lucide-react';
+import { X, Calendar, Building2, Briefcase, Wrench, ExternalLink, Award, Github } from 'lucide-react';
 
 interface PortfolioProps {
     projects: ProjectItem[];
@@ -87,7 +87,7 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                                 {/* Contenido de la Tarjeta */}
                                 <div className="px-6 pb-6 flex flex-col flex-grow relative">
                                     <h4 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                                        {project.titulo}
+                                        {project.nombre_proyecto || project.titulo}
                                     </h4>
                                     <p className="text-gray-400 text-sm leading-relaxed mb-4 pr-14">
                                         {project.descripcion}
@@ -206,16 +206,29 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                                     )}
                                 </div>
 
-                                {!isInternalLink(selectedProject.url) && (
-                                    <a 
-                                        href={selectedProject.url} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="mt-auto flex items-center justify-center gap-2 w-full py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl transition-all font-bold text-sm shadow-lg shadow-violet-900/20"
-                                    >
-                                        Visitar Proyecto <ExternalLink size={16} />
-                                    </a>
-                                )}
+                                <div className="mt-auto flex flex-col gap-3">
+                                    {!isInternalLink(selectedProject.url) && (
+                                        <a 
+                                            href={selectedProject.url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 w-full py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl transition-all font-bold text-sm shadow-lg shadow-violet-900/20"
+                                        >
+                                            Visitar Proyecto <ExternalLink size={16} />
+                                        </a>
+                                    )}
+                                    
+                                    {selectedProject.repositorio_github && (
+                                        <a 
+                                            href={selectedProject.repositorio_github} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 w-full py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-all font-bold text-sm shadow-lg shadow-slate-900/20"
+                                        >
+                                            Repositorio GitHub <Github size={16} />
+                                        </a>
+                                    )}
+                                </div>
                             </div>
 
                             {/* COLUMNA 2: CONTENIDO */}
@@ -227,6 +240,9 @@ function Portfolio({ projects: propProjects }: PortfolioProps) {
                                             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                                             {selectedProject.estado || 'Finalizado'}
                                         </div>
+                                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+                                            {selectedProject.nombre_proyecto || selectedProject.titulo}
+                                        </h2>
                                         <p className="text-xl md:text-2xl text-white font-medium italic leading-relaxed border-l-4 border-cyan-500 pl-6 py-2">
                                             "{selectedProject.descripcion}"
                                         </p>
