@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import type { ResumeData } from '../types';
-import { projectsData as staticProjects } from '../data/projects';
 import { getAssetPath } from '../utils/assets';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -165,15 +164,7 @@ export function useResumeData() {
                         estado: item.horas // Reutilizamos 'horas' para el estado si prefieres
                     }));
 
-                // Merge: API Projects + Static Projects (evitando duplicados por URL)
-                const allProjects = [...apiProjects];
-                staticProjects.forEach(staticProj => {
-                    if (!allProjects.some(p => p.url === staticProj.url)) {
-                        allProjects.push(staticProj);
-                    }
-                });
-
-                const proyectosData = allProjects.map(project => ({
+                const proyectosData = apiProjects.map(project => ({
                     ...project,
                     imagen: getAssetPath(project.imagen)
                 }));

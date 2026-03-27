@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import type { ProjectItem } from '../types';
-import { projectsData } from '../data/projects';
 import { getAssetPath } from '../utils/assets';
 import DOMPurify from 'dompurify';
 import { X, Calendar, Building2, Briefcase, Wrench, ExternalLink, Award } from 'lucide-react';
@@ -12,16 +11,10 @@ interface PortfolioProps {
 function Portfolio({ projects: propProjects }: PortfolioProps) {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-    const [projects, setProjects] = useState<ProjectItem[]>(
-        propProjects && propProjects.length > 0 ? propProjects : projectsData
-    );
+    const [projects, setProjects] = useState<ProjectItem[]>(propProjects || []);
 
     useEffect(() => {
-        if (propProjects && propProjects.length > 0) {
-            setProjects(propProjects);
-        } else {
-            setProjects(projectsData);
-        }
+        setProjects(propProjects || []);
     }, [propProjects]);
 
     // Bloquear scroll y manejar eventos de teclado
