@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import type { ProjectItem } from '../types';
-import { getAssetPath } from '../utils/assets';
 import DOMPurify from 'dompurify';
 import { X, Calendar, Building2, Briefcase, Wrench, ExternalLink, Award } from 'lucide-react';
 
