@@ -1,0 +1,107 @@
+/* ------------------------------------ */
+/* 0. VARIABLES Y CONFIGURACIÓN GLOBAL */
+/* ------------------------------------ */
+:root {
+    --color-fondo: #000000;
+    --color-texto: #ffffff;
+    --color-acento-profesional: #67a1f1;
+    --neon-primary: #8b5cf6;
+    --bg-dark: #0f172a;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: #f3f4f6;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+}
+
+/* Accesibilidad: Indicador de foco global */
+:focus-visible {
+    outline: 2px solid var(--neon-primary);
+    outline-offset: 2px;
+}
+
+/* ------------------------------------ */
+/* 1. CONTENEDOR Y MAQUETACIÓN */
+/* ------------------------------------ */
+
+/* --- Estilos para Secciones Desplegables --- */
+.seccion-desplegable summary {
+    cursor: pointer;
+    list-style: none;
+    /* Ocultar el marcador por defecto */
+    outline: none;
+}
+
+.seccion-desplegable summary::-webkit-details-marker {
+    display: none;
+    /* Ocultar el marcador en Chrome/Safari */
+}
+
+.seccion-desplegable summary h2 {
+    display: inline-block;
+    /* Para que el hover afecte solo al texto */
+    transition: color 0.2s ease;
+}
+
+.seccion-desplegable summary:hover h2 {
+    color: var(--color-acento-profesional);
+}
+
+.seccion-desplegable>section {
+    padding-top: 20px;
+}
+
+/* --- Barra de desplazamiento personalizada --- */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.2);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.4);
+}
+
+/* --- Animaciones del Modal --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.animate-in {
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+}
+
+.fade-in { animation-name: fadeIn; }
+.zoom-in { animation-name: zoomIn; }
+
+/* Estilo de Bento Grid para ajustar aspecto de imágenes */
+.bento-card-image {
+    mask-image: linear-gradient(to top, black 20%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+}
+
+/* Ajuste fino para la cuadrícula en móviles */
+@media (max-width: 768px) {
+    .auto-rows-\[280px\] {
+        auto-rows: minmax(320px, auto);
+    }
+}
